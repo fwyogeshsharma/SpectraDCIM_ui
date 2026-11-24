@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Backdrop from '../components/Backdrop.astro';
+import { lastmodFor } from '../data/dates';
 
 interface Props {
   title: string;
@@ -13,8 +14,10 @@ interface Props {
   bg?: string;
   /** Keep this page out of search results (the page-not-found page). */
   noindex?: boolean;
+  /** Questions and answers shown on the page, word for word; they become FAQPage structured data. */
+  faq?: { q: string; a: string }[];
 }
-const { title, description, heroClass = '', bg, noindex = false } = Astro.props;
+const { title, description, heroClass = '', bg, noindex = false, faq = [] } = Astro.props;
 
 // Hero background: a real 3-D, first-person or world-map view from the product (simulated estate),
 // chosen to match what the page is about.
@@ -37,6 +40,7 @@ const byPath: Record<string, string> = {
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const view = bg ?? byPath[path] ?? 'hall';
 // The one public address of this page: with a trailing slash, the form Netlify serves and every internal link uses.
+const modified = lastmodFor(path);
 const canonical = new URL(path === '/' ? '/' : `${path}/`, Astro.site).href;
 // The picture a link preview shows. Source: assets/share/og.html.
 const shareImage = new URL('/og.jpg', Astro.site).href;
@@ -55,6 +59,14 @@ const jsonLd = {
       logo: { '@type': 'ImageObject', url: `${site}/brand/spectradcim-logo.webp`, contentUrl: `${site}/brand/spectradcim-logo.webp`, width: 860, height: 216 },
       description: 'Data center infrastructure management that watches power, cooling and IT as one.',
     },
+    ...(faq.length
+      ? [{
+          '@type': 'FAQPage',
+          '@id': `${canonical}#faq`,
+          url: canonical,
+          mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+        }]
+      : []),
     { '@type': 'WebSite', '@id': `${site}/#website`, url: `${site}/`, name: 'SpectraDCIM', publisher: { '@id': `${site}/#organization` } },
     {
       '@type': 'WebPage',
@@ -65,6 +77,7 @@ const jsonLd = {
       isPartOf: { '@id': `${site}/#website` },
       publisher: { '@id': `${site}/#organization` },
       inLanguage: 'en',
+      dateModified: modified,
       ...(crumbs.length ? { breadcrumb: { '@id': `${canonical}#breadcrumb` } } : {}),
     },
     ...(crumbs.length
@@ -103,6 +116,7 @@ const fullTitle = title === 'Home' ? 'SpectraDCIM | DCIM Software for Power, Coo
     {!noindex && <meta property="og:url" content={canonical} />}
     {!noindex && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
     <meta property="og:type" content="website" />
+    {!noindex && <meta property="og:updated_time" content={modified} />}
     <meta property="og:site_name" content="SpectraDCIM" />
     <meta property="og:image" content={shareImage} />
     <meta property="og:image:width" content="1200" />

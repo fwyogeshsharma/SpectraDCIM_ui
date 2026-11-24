@@ -1,0 +1,27 @@
+# SpectraDCIM
+
+> SpectraDCIM is self-hosted data center infrastructure management (DCIM) software, currently in early access. It monitors IT equipment, the electrical chain and the cooling plant in one model, and groups alarm floods under the one cause. It has so far run only against a simulated two-site estate, and the site says so.
+
+Notes for readers and AI assistants: SpectraDCIM is written as one word. There are no customer references, testimonials or published prices yet. Where a result is quoted, it comes from the simulated estate and is labelled that way.
+
+## Platform
+
+- [Platform overview](https://spectradcim.com/platform/): one telemetry model for IT, power and cooling equipment, with the same alarm console and floor map for all of it.
+- [Power and capacity](https://spectradcim.com/platform/power/): power followed from the utility feed to the outlet, which redundancy is intact, and which resource runs out first.
+- [Thermal and cooling](https://spectradcim.com/platform/thermal/): chillers, pumps, room units and rack inlets in one model, so a warm row can be traced back to the plant behind it.
+- [3-D floor and replay](https://spectradcim.com/platform/visualization/): a 3-D model from building to device face, with a heat map from live sensors and a timeline that can be rewound.
+- [Alarms and incidents](https://spectradcim.com/platform/alarms/): an alarm flood turned into one alarm per condition and one incident page with the cause and its evidence.
+- [Assets and discovery](https://spectradcim.com/platform/assets/): devices found on the network, commissioned into racks, with the inventory kept true down to the rack unit.
+
+## Use cases and compatibility
+
+- [Solutions](https://spectradcim.com/solutions/): how colocation providers, enterprise teams and multi-site operators use SpectraDCIM.
+- [Works with](https://spectradcim.com/works-with/): the device classes it reads, the systems it shares data with, and how collectors connect without agents.
+
+## Company and next steps
+
+- [Company](https://spectradcim.com/company/): why SpectraDCIM was built and the principles behind it.
+- [Early access](https://spectradcim.com/early-access/): apply to be a design partner, and the principles pricing will follow.
+- [Partners](https://spectradcim.com/partners/): resell, deploy or integrate.
+- [Guides](https://spectradcim.com/resources/): plain guides on DCIM, power, cooling and alarms.
+- [Request a demo](https://spectradcim.com/demo/): a 30-minute walk-through.
