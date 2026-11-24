@@ -12,12 +12,12 @@ import Backdrop from '../components/Backdrop.astro';
 
 
 const modules = [
-  { href: '/platform/power', icon: 'power', title: 'Power & capacity', text: 'The whole power chain, its redundancy, and how much headroom is left.' },
-  { href: '/platform/thermal', icon: 'thermal', title: 'Thermal & cooling', text: 'One cooling picture from the chiller plant to the server inlet.' },
-  { href: '/platform/visualization', icon: 'cube', title: '3-D floor & replay', text: 'Walk the building, read the heat map, then rewind the last hours.' },
-  { href: '/platform/alarms', icon: 'bell', title: 'Alarms & incidents', text: 'One condition, one alarm, and one incident with its evidence.' },
-  { href: '/platform/assets', icon: 'rack', title: 'Assets & discovery', text: 'An inventory that matches the floor, from site down to rack unit.' },
-  { href: '/works-with', icon: 'plug', title: 'Works with', text: 'The equipment classes it reads and the systems it shares data with.' },
+  { href: '/platform/power/', icon: 'power', title: 'Power & capacity', text: 'The whole power chain, its redundancy, and how much headroom is left.' },
+  { href: '/platform/thermal/', icon: 'thermal', title: 'Thermal & cooling', text: 'One cooling picture from the chiller plant to the server inlet.' },
+  { href: '/platform/visualization/', icon: 'cube', title: '3-D floor & replay', text: 'Walk the building, read the heat map, then rewind the last hours.' },
+  { href: '/platform/alarms/', icon: 'bell', title: 'Alarms & incidents', text: 'One condition, one alarm, and one incident with its evidence.' },
+  { href: '/platform/assets/', icon: 'rack', title: 'Assets & discovery', text: 'An inventory that matches the floor, from site down to rack unit.' },
+  { href: '/works-with/', icon: 'plug', title: 'Works with', text: 'The equipment classes it reads and the systems it shares data with.' },
 ];
 
 const personas = [
@@ -31,14 +31,14 @@ const starts = [
   {
     title: 'Live demo',
     text: 'Thirty minutes on a running estate.',
-    href: '/demo',
+    href: '/demo/',
     link: 'Request a demo',
     checks: ['Live estate overview', 'Chiller-loss scenario, first alarm to incident', 'Power chain and thermal replay'],
   },
   {
     title: 'Design partner pilot',
     text: 'One site, deployed with our engineers.',
-    href: '/early-access',
+    href: '/early-access/',
     link: 'Apply for early access',
     checks: ['Guided deployment on your network', 'Direct line to the engineering team', 'A say in what gets built next'],
     featured: true,
@@ -46,7 +46,7 @@ const starts = [
   {
     title: 'Partner program',
     text: 'Resell it or integrate with it.',
-    href: '/partners',
+    href: '/partners/',
     link: 'Become a partner',
     checks: ['Reseller and integrator tracks', 'A simulated data center for demos', 'Technical enablement'],
   },
@@ -60,9 +60,9 @@ const faqs = [
 ];
 
 const guides = [
-  { href: '/resources', topic: 'Guide', title: 'What is DCIM?', text: 'What the term covers, what it does not, and where it meets the BMS.' },
-  { href: '/resources', topic: 'Guide', title: 'DCIM vs BMS vs EPMS', text: 'Three systems, three jobs, and the gaps between them.' },
-  { href: '/resources', topic: 'Alarms', title: 'Traps vs polling: why you need both', text: 'The trap makes it fast. The poll makes it true.' },
+  { href: '/resources/', topic: 'Guide', title: 'What is DCIM?', text: 'What the term covers, what it does not, and where it meets the BMS.' },
+  { href: '/resources/', topic: 'Guide', title: 'DCIM vs BMS vs EPMS', text: 'Three systems, three jobs, and the gaps between them.' },
+  { href: '/resources/', topic: 'Alarms', title: 'Traps vs polling: why you need both', text: 'The trap makes it fast. The poll makes it true.' },
 ];
 ---
 
@@ -80,8 +80,8 @@ const guides = [
           one problem that caused them.
         </p>
         <div class="btn-row">
-          <Btn href="/demo" anim>Request a demo</Btn>
-          <Btn href="/platform" variant="dark" anim>Tour the platform</Btn>
+          <Btn href="/demo/" anim>Request a demo</Btn>
+          <Btn href="/platform/" variant="dark" anim>Tour the platform</Btn>
         </div>
       </div>
     </section>
@@ -122,7 +122,7 @@ const guides = [
               warms, servers throttle. SpectraDCIM models the dependency between them, so the alarm you see first is
               the one that matters.
             </p>
-            <Btn href="/platform" variant="dark" anim>Explore the platform</Btn>
+            <Btn href="/platform/" variant="dark" anim>Explore the platform</Btn>
           </div>
         </div>
       </div>
@@ -258,9 +258,9 @@ const guides = [
         <h3>Contact</h3>
         <p>Questions about your kind of site? Tell us what you run and we will show it.</p>
         <ul>
-          <li><a href="/demo"><span class="ico"><Icon name="mail" size={20} /></span>Request a demo</a></li>
-          <li><a href="/early-access"><span class="ico"><Icon name="flag" size={20} /></span>Apply for early access</a></li>
-          <li><a href="/partners"><span class="ico"><Icon name="handshake" size={20} /></span>Partner with us</a></li>
+          <li><a href="/demo/"><span class="ico"><Icon name="mail" size={20} /></span>Request a demo</a></li>
+          <li><a href="/early-access/"><span class="ico"><Icon name="flag" size={20} /></span>Apply for early access</a></li>
+          <li><a href="/partners/"><span class="ico"><Icon name="handshake" size={20} /></span>Partner with us</a></li>
         </ul>
       </div>
       <div>
@@ -287,7 +287,7 @@ const guides = [
           <span class="pill" data-anim="up">Resources</span>
           <h2 data-anim="up">Plain answers about running data centers</h2>
         </div>
-        <Btn href="/resources" variant="dark" anim>View all</Btn>
+        <Btn href="/resources/" variant="dark" anim>View all</Btn>
       </div>
       <div class="grid grid-3" data-anim="up-block">
         {

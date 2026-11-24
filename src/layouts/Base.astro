@@ -36,8 +36,8 @@ const byPath: Record<string, string> = {
 };
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const view = bg ?? byPath[path] ?? 'hall';
-// The one public address of this page: no trailing slash, the same form every internal link uses.
-const canonical = new URL(path, Astro.site).href;
+// The one public address of this page: with a trailing slash, the form Netlify serves and every internal link uses.
+const canonical = new URL(path === '/' ? '/' : `${path}/`, Astro.site).href;
 // The picture a link preview shows. Source: assets/share/og.html.
 const shareImage = new URL('/og.jpg', Astro.site).href;
 const site = Astro.site!.href.replace(/\/$/, '');
@@ -52,22 +52,9 @@ const jsonLd = {
       '@id': `${site}/#organization`,
       name: 'SpectraDCIM',
       url: `${site}/`,
-      logo: { '@type': 'ImageObject', url: `${site}/brand/spectradcim-logo.webp`, width: 860, height: 216 },
+      logo: { '@type': 'ImageObject', url: `${site}/brand/spectradcim-logo.webp`, contentUrl: `${site}/brand/spectradcim-logo.webp`, width: 860, height: 216 },
       description: 'Data center infrastructure management that watches power, cooling and IT as one.',
     },
-    // The product itself. No price, rating or customer data: none exists yet (see docs/content-brief.md).
-    ...(path === '/' || path.startsWith('/platform')
-      ? [{
-          '@type': 'SoftwareApplication',
-          '@id': `${site}/#software`,
-          name: 'SpectraDCIM',
-          applicationCategory: 'BusinessApplication',
-          applicationSubCategory: 'Data center infrastructure management (DCIM)',
-          description: 'Self-hosted data center infrastructure management software that monitors power, cooling and IT equipment in one model and groups alarm floods under the one cause.',
-          url: `${site}/`,
-          publisher: { '@id': `${site}/#organization` },
-        }]
-      : []),
     { '@type': 'WebSite', '@id': `${site}/#website`, url: `${site}/`, name: 'SpectraDCIM', publisher: { '@id': `${site}/#organization` } },
     {
       '@type': 'WebPage',
@@ -90,13 +77,16 @@ const jsonLd = {
               '@type': 'ListItem',
               position: i + 2,
               name: crumbName(seg, i),
-              item: `${site}/${crumbs.slice(0, i + 1).join('/')}`,
+              item: `${site}/${crumbs.slice(0, i + 1).join('/')}/`,
             })),
           ],
         }]
       : []),
   ],
 };
+// Visitor tracking script. Set PUBLIC_TRACKING_SRC to the tracker's public address, e.g. https://track.example.com/t.js
+// (an http://127.0.0.1 address only works on the machine running the tracker). Left empty, nothing is added.
+const trackingSrc = import.meta.env.PUBLIC_TRACKING_SRC;
 const fullTitle = title === 'Home' ? 'SpectraDCIM | DCIM Software for Power, Cooling and IT' : `${title} | SpectraDCIM`;
 ---
 
@@ -124,6 +114,7 @@ const fullTitle = title === 'Home' ? 'SpectraDCIM | DCIM Software for Power, Coo
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={shareImage} />
     <meta name="theme-color" content="#000000" />
+    {trackingSrc && !noindex && <script is:inline defer src={trackingSrc} data-site="spectradcim.com"></script>}
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
