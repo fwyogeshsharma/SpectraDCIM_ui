@@ -1,0 +1,58 @@
+---
+import Btn from './Btn.astro';
+interface Props {
+  pill?: string;
+  title?: string;
+  href?: string;
+  label?: string;
+}
+const {
+  pill = 'Ready to see your site as one system?',
+  title = 'Start with a 30‑minute demo',
+  href = '/demo',
+  label = 'Request a demo',
+} = Astro.props;
+---
+
+<section class="section--tight cta-sec">
+  <div class="wrap">
+    <div class="cta" data-anim="up-block">
+      <div class="cta__inner">
+        <span class="pill pill--plain cta__pill">{pill}</span>
+        <h2>{title}</h2>
+        <Btn href={href} variant="dark">{label}</Btn>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-sec {
+    padding-block: clamp(40px, 6vw, 90px);
+  }
+  .cta {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--r-card);
+    background-color: var(--accent);
+    padding: clamp(56px, 7vw, 110px) 24px;
+    text-align: center;
+  }
+  .cta__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    justify-items: center;
+    gap: var(--s-5);
+  }
+  .cta__pill {
+    background: none;
+    border: 0;
+    color: #fff;
+  }
+  .cta h2 {
+    color: #fff;
+    max-width: 20ch;
+    font-size: clamp(32px, 4.4vw, 58px);
+  }
+</style>

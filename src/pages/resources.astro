@@ -1,0 +1,243 @@
+---
+import Backdrop from '../components/Backdrop.astro';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+
+const chips = [
+  { id: 'all', label: 'All' },
+  { id: 'guides', label: 'Guides' },
+  { id: 'power', label: 'Power' },
+  { id: 'cooling', label: 'Cooling' },
+  { id: 'alarms', label: 'Alarms' },
+  { id: 'sustainability', label: 'Sustainability' },
+];
+
+const guides = [
+  { topics: ['guides'], topic: 'Guides', title: 'DCIM vs BMS vs EPMS', text: 'Three systems, three jobs, and the gaps between them.' },
+  { topics: ['power', 'sustainability'], topic: 'Power', title: 'How to calculate PUE', text: 'What goes above the line, what goes below it, and where the meters need to be.' },
+  { topics: ['alarms'], topic: 'Alarms', title: 'Traps vs polling: why you need both', text: 'The trap makes it fast. The poll makes it true.' },
+  { topics: ['alarms'], topic: 'Alarms', title: 'Alarm floods and ISA-18.2', text: 'What the standard says about floods, and what it means for a data center console.' },
+  { topics: ['sustainability'], topic: 'Sustainability', title: 'EU EED reporting for data centers', text: 'Who has to report, which figures are asked for, and what you need to measure.' },
+  { topics: ['cooling'], topic: 'Cooling', title: 'Monitoring liquid cooling', text: 'What to read from a CDU, and which readings tell you a loop is in trouble.' },
+];
+
+const approach = [
+  { icon: 'file', title: 'Plain language', text: 'Each guide answers one question an operator actually asks, in the words they would use.' },
+  { icon: 'cube', title: 'Worked examples', text: 'Examples come from our simulated data center, and are labeled as simulated every time.' },
+  { icon: 'link', title: 'Sources named', text: 'When we quote a figure or a standard, the source is on the page next to it.' },
+];
+---
+
+<Base
+  title="DCIM guides on power, cooling and alarms"
+  description="Plain guides on DCIM, power, cooling, alarms and sustainability reporting for people who run data centers."
+>
+  <PageHero slot="hero" pill="Resources" title="Plain answers about running data centers" center>
+    Guides on power, cooling, alarms and reporting, from the people building SpectraDCIM. The first ones are being
+    written now.
+  </PageHero>
+
+  <!-- featured -->
+  <section class="section--tight">
+    <div class="wrap">
+      <div class="card card--raised feature" data-anim="up-block">
+        <div class="feature__text">
+          <p class="guide__topic">Guides <span class="tag">Coming soon</span></p>
+          <h2>What is DCIM?</h2>
+          <p class="lead">
+            What the term covers, what it does not, and where it meets the building management system. The place to
+            start if you are deciding whether you need one.
+          </p>
+          <ul class="checks">
+            <li>What a DCIM reads, and from which equipment</li>
+            <li>Where its job ends and the plant controls begin</li>
+            <li>The questions to ask before you buy one</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- guides -->
+  <section class="section">
+    <div class="wrap">
+      <SectionHead pill="Guides" title="What we are writing">
+        None of these is published yet, so none of them is a link. Filter by topic to see what is planned.
+      </SectionHead>
+      <div class="chips" role="group" aria-label="Filter guides by topic" data-anim="up" data-chips>
+        {
+          chips.map((c) => (
+            <button type="button" class="chip" data-filter={c.id} aria-pressed={c.id === 'all' ? 'true' : 'false'}>
+              {c.label}
+            </button>
+          ))
+        }
+      </div>
+      <p class="chips__count" role="status" data-anim="up" data-count-line>Showing all 6 planned guides.</p>
+      <div class="grid grid-3" data-guides>
+        {
+          guides.map((g, k) => (
+            <article class="card card--raised guide" data-topic={g.topics.join(' ')} data-anim="up-block">
+              <p class="guide__topic">
+                {g.topic} <span class="tag">Coming soon</span>
+              </p>
+              <h3>{g.title}</h3>
+              <p>{g.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- approach -->
+  <section class="section pbg">
+    <Backdrop view="racks" />
+    <div class="wrap">
+      <SectionHead pill="How we write" title="Three rules for every guide" center />
+      <div class="grid grid-3">
+        {
+          approach.map((a) => (
+            <div class="card card--grid" data-anim="up">
+              <span class="tile">
+                <Icon name={a.icon} />
+              </span>
+              <h3>{a.title}</h3>
+              <p>{a.text}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="card silk-card next" data-anim="up">
+        <div>
+          <h3>Tell us what to write next</h3>
+          <p>If there is a question about running a data center you cannot find a straight answer to, ask us for it.</p>
+        </div>
+        <a class="link-arrow" href="/demo">
+          Suggest a topic
+          <span class="circle"><Icon name="arrow" size={16} /></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<script>
+  const group = document.querySelector('[data-chips]');
+  const cards = document.querySelectorAll('[data-guides] [data-topic]');
+  const line = document.querySelector('[data-count-line]');
+  if (group) {
+    group.addEventListener('click', (ev) => {
+      const chip = ev.target instanceof Element ? ev.target.closest('[data-filter]') : null;
+      if (!chip) return;
+      const topic = chip.getAttribute('data-filter');
+      group.querySelectorAll('[data-filter]').forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      let shown = 0;
+      cards.forEach((card) => {
+        const match = topic === 'all' || (card.getAttribute('data-topic') || '').split(' ').includes(topic || '');
+        card.toggleAttribute('hidden', !match);
+        if (match) shown += 1;
+      });
+      if (line) {
+        line.textContent =
+          topic === 'all'
+            ? `Showing all ${shown} planned guides.`
+            : `Showing ${shown} of ${cards.length} planned guides: ${chip.textContent?.trim()}.`;
+      }
+    });
+  }
+</script>
+
+<style>
+  /* featured */
+  .feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    padding: clamp(24px, 2.4vw, 36px);
+  }
+  .feature__text {
+    padding: 0;
+    max-width: 760px;
+  }
+  .feature__text h2 {
+    margin-bottom: var(--s-4);
+  }
+  .feature__text .checks {
+    margin-top: var(--s-5);
+  }
+  @media (max-width: 900px) {
+    .feature {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  /* chips */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+  }
+  .chip {
+    min-height: 44px;
+    padding: var(--s-2) var(--s-5);
+    border-radius: var(--r-round);
+    border: 1px solid var(--line-strong);
+    background: var(--ink-1);
+    color: var(--body);
+    font-family: var(--font-head);
+    font-size: 15px;
+    cursor: pointer;
+    transition:
+      background 0.15s ease-in-out,
+      color 0.15s ease-in-out,
+      border-color 0.15s ease-in-out;
+  }
+  .chip:hover {
+    border-color: var(--accent-text);
+    color: var(--head);
+  }
+  .chip[aria-pressed='true'] {
+    background: var(--accent);
+    border-color: var(--line-strong);
+    color: var(--head);
+  }
+  .chips__count {
+    margin: var(--s-4) 0 var(--s-6);
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  /* guide cards (same form as Home) */
+  .guide {
+    padding: var(--s-6);
+  }
+  .guide[hidden] {
+    display: none;
+  }
+  .guide__topic {
+    font-size: 14px;
+    color: var(--accent-text);
+    margin-bottom: var(--s-2);
+  }
+  .guide h3 + p {
+    margin-top: var(--s-2);
+  }
+
+  /* next */
+  .next {
+    margin-top: var(--s-5);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-5) var(--s-7);
+  }
+  .next p {
+    max-width: 56ch;
+  }
+</style>

@@ -1,0 +1,150 @@
+{
+ "hall-temp": [
+  1800,
+  886
+ ],
+ "replay-bar": [
+  1920,
+  1047
+ ],
+ "replay-wide": [
+  1920,
+  1047
+ ],
+ "viewer-full": [
+  1920,
+  1047
+ ],
+ "hall-alarm": [
+  1920,
+  1047
+ ],
+ "hall-power": [
+  1920,
+  1047
+ ],
+ "hallb-inlet": [
+  1920,
+  1047
+ ],
+ "plan-heat": [
+  1920,
+  1047
+ ],
+ "plant": [
+  1920,
+  1047
+ ],
+ "site-view": [
+  1920,
+  1047
+ ],
+ "building": [
+  1920,
+  1047
+ ],
+ "incidents": [
+  1834,
+  893
+ ],
+ "incident-page": [
+  1506,
+  1134
+ ],
+ "incident-cause": [
+  605,
+  246
+ ],
+ "incident-evidence": [
+  678,
+  439
+ ],
+ "home": [
+  1920,
+  818
+ ],
+ "inventory": [
+  1905,
+  780
+ ],
+ "discovery": [
+  1920,
+  1063
+ ],
+ "placement": [
+  1784,
+  696
+ ],
+ "maintenance": [
+  1920,
+  267
+ ],
+ "assets-overview": [
+  1920,
+  1514
+ ],
+ "rack": [
+  1800,
+  809
+ ],
+ "rack-feeds": [
+  905,
+  190
+ ],
+ "rack-redundancy": [
+  1009,
+  164
+ ],
+ "rack-unusual": [
+  1268,
+  378
+ ],
+ "platform": [
+  1920,
+  1179
+ ],
+ "connectivity": [
+  1920,
+  1028
+ ],
+ "world": [
+  1920,
+  968
+ ],
+ "power-top": [
+  1920,
+  494
+ ],
+ "power-headroom": [
+  842,
+  224
+ ],
+ "power-draw": [
+  1320,
+  692
+ ],
+ "power-pue": [
+  1320,
+  594
+ ],
+ "thermal-top": [
+  1920,
+  467
+ ],
+ "thermal-intake": [
+  1320,
+  654
+ ],
+ "thermal-band": [
+  1320,
+  452
+ ],
+ "capacity": [
+  1920,
+  467
+ ],
+ "analytics": [
+  1358,
+  168
+ ]
+}

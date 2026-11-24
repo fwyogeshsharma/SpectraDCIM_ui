@@ -1,0 +1,606 @@
+---
+import Shot from '../components/Shot.astro';
+import Base from '../layouts/Base.astro';
+import Btn from '../components/Btn.astro';
+import Icon from '../components/Icon.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import MockHall from '../components/MockHall.astro';
+import MockAlarms from '../components/MockAlarms.astro';
+import MockChart from '../components/MockChart.astro';
+import Backdrop from '../components/Backdrop.astro';
+
+
+const modules = [
+  { href: '/platform/power', icon: 'power', title: 'Power & capacity', text: 'The whole power chain, its redundancy, and how much headroom is left.' },
+  { href: '/platform/thermal', icon: 'thermal', title: 'Thermal & cooling', text: 'One cooling picture from the chiller plant to the server inlet.' },
+  { href: '/platform/visualization', icon: 'cube', title: '3-D floor & replay', text: 'Walk the building, read the heat map, then rewind the last hours.' },
+  { href: '/platform/alarms', icon: 'bell', title: 'Alarms & incidents', text: 'One condition, one alarm, and one incident with its evidence.' },
+  { href: '/platform/assets', icon: 'rack', title: 'Assets & discovery', text: 'An inventory that matches the floor, from site down to rack unit.' },
+  { href: '/works-with', icon: 'plug', title: 'Works with', text: 'The equipment classes it reads and the systems it shares data with.' },
+];
+
+const personas = [
+  { role: 'DC operations', q: 'Which of these 700 alarms is the cause?' },
+  { role: 'Facility manager', q: 'Which train is carrying the load, and what happens if it trips?' },
+  { role: 'Capacity planner', q: 'What runs out first: power, cooling, space or ports?' },
+  { role: 'Sustainability lead', q: 'What is our PUE, site by site, hour by hour?' },
+];
+
+const starts = [
+  {
+    title: 'Live demo',
+    text: 'Thirty minutes on a running estate.',
+    href: '/demo',
+    link: 'Request a demo',
+    checks: ['Live estate overview', 'Chiller-loss scenario, first alarm to incident', 'Power chain and thermal replay'],
+  },
+  {
+    title: 'Design partner pilot',
+    text: 'One site, deployed with our engineers.',
+    href: '/early-access',
+    link: 'Apply for early access',
+    checks: ['Guided deployment on your network', 'Direct line to the engineering team', 'A say in what gets built next'],
+    featured: true,
+  },
+  {
+    title: 'Partner program',
+    text: 'Resell it or integrate with it.',
+    href: '/partners',
+    link: 'Become a partner',
+    checks: ['Reseller and integrator tracks', 'A simulated data center for demos', 'Technical enablement'],
+  },
+];
+
+const faqs = [
+  { q: 'Is SpectraDCIM hosted or self-hosted?', a: 'Self-hosted, on your own infrastructure. The platform and its collectors run inside your network, and your telemetry stays there.' },
+  { q: 'How does it connect to my equipment?', a: 'Collectors on your network read devices over the standard interfaces they already expose, so no agents are installed on the equipment.' },
+  { q: 'Does it replace my BMS?', a: 'No. The building management system keeps controlling the plant. SpectraDCIM reads the plant alongside the electrical chain and the IT equipment, so one console shows how they affect each other.' },
+  { q: 'Is it available today?', a: 'It is in early access. We are onboarding a small number of design partners; a live demo is available now.' },
+];
+
+const guides = [
+  { href: '/resources', topic: 'Guide', title: 'What is DCIM?', text: 'What the term covers, what it does not, and where it meets the BMS.' },
+  { href: '/resources', topic: 'Guide', title: 'DCIM vs BMS vs EPMS', text: 'Three systems, three jobs, and the gaps between them.' },
+  { href: '/resources', topic: 'Alarms', title: 'Traps vs polling: why you need both', text: 'The trap makes it fast. The poll makes it true.' },
+];
+---
+
+<Base
+  title="Home"
+  description="SpectraDCIM monitors every site from the utility feed to the server outlet, and turns alarm floods into the one problem that caused them."
+>
+  <Fragment slot="hero">
+    <section class="hero hero--rise">
+      <div class="wrap">
+        <span class="pill" data-anim="up">Data center infrastructure management</span>
+        <h1 data-anim="up">Power, cooling and IT. One system, watched as one.</h1>
+        <p class="lead" data-anim="up">
+          SpectraDCIM monitors every site from the utility feed to the server outlet, and turns alarm floods into the
+          one problem that caused them.
+        </p>
+        <div class="btn-row">
+          <Btn href="/demo" anim>Request a demo</Btn>
+          <Btn href="/platform" variant="dark" anim>Tour the platform</Btn>
+        </div>
+      </div>
+    </section>
+  </Fragment>
+
+  <!-- replay -->
+  <section class="section--tight">
+    <div class="wrap">
+      <div class="card card--raised replay" data-anim="up-block">
+        <div class="replay__head">
+          <h3>See the room, then replay it</h3>
+          <p>A heat map drawn from live sensors, and a timeline you can scrub back through like video.</p>
+        </div>
+        <Shot
+          name="replay-bar"
+          alt="Server hall in 3-D in replay: the timeline bar along the bottom with its marker, play controls, step and speed"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- about -->
+  <section class="section">
+    <div class="wrap about">
+      <div><span class="pill" data-anim="up">About SpectraDCIM</span></div>
+      <div>
+        <p class="about__statement" data-anim="up">
+          One telemetry model for white space and gray space: servers, switches, PDUs, UPS, switchgear, chillers, CRAHs
+          and CDUs in the same console.
+        </p>
+        <div class="about__row">
+          <div class="about__fig" data-anim="up">
+            <Shot name="incident-evidence" alt="Incident evidence: plant water temperatures, then intake air at the first devices to go hot" />
+          </div>
+          <div class="stack">
+            <p data-anim="up">
+              Most tools watch the IT room or the plant. An outage does not respect that line: a pump trips, a hall
+              warms, servers throttle. SpectraDCIM models the dependency between them, so the alarm you see first is
+              the one that matters.
+            </p>
+            <Btn href="/platform" variant="dark" anim>Explore the platform</Btn>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- why -->
+  <section class="section pbg">
+    <Backdrop view="plant" />
+    <div class="wrap split">
+      <div>
+        <SectionHead pill="Why SpectraDCIM" title="Most outages start in the plant, not the rack">
+          Power is the leading cause of impactful outages, and cooling is next. Watching IT alone finds the problem
+          last.
+        </SectionHead>
+        <div class="grid grid-2">
+          <div class="stat" data-anim="up">
+            <div class="stat__num"><span>45</span><em>%</em></div>
+            <div class="stat__label">Outages caused by power</div>
+            <p class="stat__cap">Uptime Institute Global Data Center Survey, 2025</p>
+          </div>
+          <div class="stat" data-anim="up">
+            <div class="stat__num stat__num--pair"><span>727</span><em aria-hidden="true">&rarr;</em><span class="sr-only"> to </span><span>10</span></div>
+            <div class="stat__label">Alarms to console lines</div>
+            <p class="stat__cap">In a simulated chiller-plant loss: 9 lines and 1 summary alarm</p>
+          </div>
+        </div>
+      </div>
+      <div class="why__visual" data-anim="up-block">
+        <div class="card card--grid why__panel">
+          <Shot name="incident-cause" alt="Incident cause: one plant unit stopped, 701 downstream alarms folded under it, and the rooms it reached" />
+        </div>
+        <span class="pill why__float">One condition, one alarm</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- platform -->
+  <section class="section">
+    <div class="wrap">
+      <SectionHead pill="Platform" title="Everything between the utility feed and the outlet" center />
+      <div class="grid grid-3">
+        {
+          modules.map((m) => (
+            <a class="card card--grid mod" href={m.href} data-anim="up">
+              <span class="tile">
+                <Icon name={m.icon} />
+              </span>
+              <h3>{m.title}</h3>
+              <p>{m.text}</p>
+              <span class="mod__go" aria-hidden="true">
+                <Icon name="arrow" size={16} />
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- personas -->
+  <section class="section pbg">
+    <Backdrop view="racks" />
+    <div class="wrap split">
+      <div data-carousel>
+        <span class="pill" data-anim="up">Who it is for</span>
+        <div class="quote" data-anim="up">
+          <span class="quote__mark" aria-hidden="true"><Icon name="quote" size={40} /></span>
+          {
+            personas.map((p, k) => (
+              <figure data-slide hidden={k !== 0}>
+                <blockquote>{p.q}</blockquote>
+                <figcaption>{p.role}</figcaption>
+              </figure>
+            ))
+          }
+        </div>
+        <div class="quote__ctl" data-anim="up">
+          <div class="quote__dots">
+            {personas.map((p, k) => <button type="button" data-dot aria-label={`Show question from ${p.role}`} aria-current={k === 0 ? 'true' : 'false'} />)}
+          </div>
+        </div>
+        <div class="grid grid-2 quote__more">
+          {
+            personas.slice(1, 3).map((p) => (
+              <div class="card card--raised" data-anim="up">
+                <p class="quote__small">{p.q}</p>
+                <p class="quote__role">{p.role}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="card card--grid persona__visual" data-anim="up-block">
+        <Shot name="hall-alarm" alt="Server hall in 3-D with racks colored by their worst open alarm" />
+      </div>
+    </div>
+  </section>
+
+  <!-- get started -->
+  <section class="section pbg">
+    <Backdrop view="world" />
+    <div class="wrap">
+      <SectionHead pill="Get started" title="Three ways to begin" center />
+      <div class="grid grid-3 starts">
+        {
+          starts.map((s) => (
+            <div class:list={['card', s.featured ? 'silk-card start--featured' : 'card--raised']} data-anim="up">
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+              <a class="link-arrow" href={s.href}>
+                {s.link}
+                <span class="circle">
+                  <Icon name="arrow" size={16} />
+                </span>
+              </a>
+              <div class="start__inner">
+                <ul class="checks">
+                  {s.checks.map((c) => <li>{c}</li>)}
+                </ul>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- faq -->
+  <section class="section">
+    <div class="wrap faq-split">
+      <div class="card silk-card faq-contact" data-anim="up-block">
+        <h3>Contact</h3>
+        <p>Questions about your kind of site? Tell us what you run and we will show it.</p>
+        <ul>
+          <li><a href="/demo"><span class="ico"><Icon name="mail" size={20} /></span>Request a demo</a></li>
+          <li><a href="/early-access"><span class="ico"><Icon name="flag" size={20} /></span>Apply for early access</a></li>
+          <li><a href="/partners"><span class="ico"><Icon name="handshake" size={20} /></span>Partner with us</a></li>
+        </ul>
+      </div>
+      <div>
+        <SectionHead title="Frequently asked questions" />
+        <div class="faq" data-anim="up-block">
+          {
+            faqs.map((f, k) => (
+              <details name="home-faq" open={k === 0}>
+                <summary>{f.q}</summary>
+                <p class="faq__a">{f.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- resources -->
+  <section class="section">
+    <div class="wrap">
+      <div class="res-head">
+        <div>
+          <span class="pill" data-anim="up">Resources</span>
+          <h2 data-anim="up">Plain answers about running data centers</h2>
+        </div>
+        <Btn href="/resources" variant="dark" anim>View all</Btn>
+      </div>
+      <div class="grid grid-3" data-anim="up-block">
+        {
+          guides.map((g) => (
+            <a class="card card--raised guide" href={g.href}>
+              <p class="guide__topic">{g.topic}</p>
+              <h3>{g.title}</h3>
+              <p>{g.text}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  /* hero */
+  .hero {
+    padding-top: clamp(40px, 7vw, 96px);
+    padding-bottom: clamp(50px, 7vw, 96px);
+  }
+  .hero h1 {
+    margin: var(--s-5) 0 0;
+    max-width: 16ch;
+    text-wrap: balance;
+  }
+  .hero .lead {
+    margin-top: var(--s-6);
+    max-width: 44ch;
+    font-size: clamp(22px, 2.4vw, 30px);
+    font-weight: 700;
+    line-height: 1.25;
+    color: #fff;
+  }
+  .hero .btn-row {
+    margin-top: var(--s-7);
+  }
+
+  /* replay */
+  .replay {
+    display: grid;
+    gap: var(--s-5);
+  }
+  .replay__head {
+    display: grid;
+    gap: var(--s-2);
+  }
+  .replay__head h3 {
+    font-size: clamp(22px, 2.2vw, 30px);
+  }
+  .replay__head p {
+    max-width: 60ch;
+    color: var(--muted);
+  }
+  .stat__num--pair {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25em;
+    white-space: nowrap;
+    font-size: clamp(34px, 3.4vw, 48px);
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  /* about */
+  .about {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-4);
+  }
+  .about__statement {
+    font-family: var(--font-head);
+    font-size: clamp(22px, 2.5vw, 34px);
+    line-height: 1.3;
+    color: var(--head);
+  }
+  .about__row {
+    display: grid;
+    /* The screen gets the wider column: at 300px its chart text could not be read. */
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: var(--s-7);
+    margin-top: var(--s-7);
+    align-items: center;
+  }
+  .about__row .stack {
+    --gap: 28px;
+  }
+  @media (max-width: 900px) {
+    .about,
+    .about__row {
+      grid-template-columns: 1fr;
+      gap: var(--s-5);
+    }
+  }
+
+  /* why */
+  .why__visual {
+    position: relative;
+  }
+  .why__panel {
+    padding: var(--s-3);
+    min-height: 0;
+    display: grid;
+    align-content: center;
+  }
+  .why__float {
+    display: block;
+    margin-top: var(--s-4);
+  }
+
+  /* modules */
+  .mod {
+    min-height: 270px;
+  }
+  .mod__go {
+    position: absolute;
+    right: 26px;
+    bottom: 26px;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--ink-2);
+    color: var(--head);
+    transition:
+      background 0.15s ease-in-out,
+      transform 0.2s ease;
+  }
+  .mod:hover .mod__go {
+    background: var(--accent);
+  }
+  .mod p {
+    max-width: 30ch;
+    padding-bottom: var(--s-7);
+  }
+
+  /* personas */
+  .quote {
+    margin-top: var(--s-5);
+    min-height: 210px;
+  }
+  .quote__mark {
+    color: var(--accent-text);
+  }
+  .quote figure {
+    margin: var(--s-4) 0 0;
+  }
+  .quote figure.is-active {
+    animation: quoteIn 0.5s ease both;
+  }
+  @keyframes quoteIn {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
+  .quote blockquote {
+    margin: 0;
+    font-family: var(--font-head);
+    font-size: clamp(24px, 2.8vw, 36px);
+    line-height: 1.25;
+    color: var(--head);
+  }
+  .quote figcaption {
+    margin-top: var(--s-4);
+    color: var(--accent-text);
+    font-family: var(--font-head);
+  }
+  .quote__ctl {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    margin-top: var(--s-2);
+  }
+  .quote__dots {
+    display: flex;
+    gap: var(--s-1);
+  }
+  .quote__dots button {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+  }
+  .quote__dots button::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--ink-2);
+    border: 1px solid var(--line-strong);
+    transition:
+      width 0.25s ease,
+      background 0.2s ease;
+  }
+  .quote__dots button[aria-current='true']::before {
+    width: 24px;
+    border-radius: var(--r-small);
+    background: var(--accent-text);
+  }
+  .quote__more {
+    margin-top: var(--s-6);
+  }
+  .quote__small {
+    color: var(--head);
+  }
+  .quote__role {
+    margin-top: var(--s-3);
+    font-size: 14px;
+    color: var(--accent-text);
+  }
+  .persona__visual {
+    padding: clamp(18px, 2.2vw, 30px);
+  }
+
+  /* starts */
+  .starts {
+    align-items: stretch;
+  }
+  .starts .card {
+    display: grid;
+    gap: var(--s-4);
+    align-content: start;
+  }
+  .start--featured {
+    border-color: var(--signal-line);
+  }
+  .start__inner {
+    margin-top: var(--s-2);
+    padding: var(--s-5);
+    border-radius: var(--r-card);
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid var(--line);
+  }
+
+  /* faq */
+  .faq-split {
+    display: grid;
+    grid-template-columns: minmax(0, 0.46fr) minmax(0, 1fr);
+    gap: clamp(28px, 4vw, 60px);
+    align-items: start;
+  }
+  .faq-contact {
+    min-height: 340px;
+    display: grid;
+    gap: var(--s-4);
+    align-content: start;
+  }
+  .faq-contact ul {
+    list-style: none;
+    margin: var(--s-2) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--s-4);
+  }
+  .faq-contact a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-4);
+    color: var(--head);
+  }
+  .faq-contact a:hover {
+    color: var(--accent-text);
+  }
+  .faq-contact .ico {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--accent-tile);
+  }
+  @media (max-width: 900px) {
+    .faq-split {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* resources */
+  .res-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: end;
+    gap: var(--s-5);
+    margin-bottom: clamp(36px, 4vw, 60px);
+  }
+  .res-head h2 {
+    margin-top: var(--s-4);
+    max-width: 16ch;
+  }
+  .guide {
+    padding-block: var(--s-6);
+  }
+  .guide__topic {
+    font-size: 14px;
+    color: var(--accent-text);
+    margin-bottom: var(--s-2);
+  }
+  .guide h3 + p {
+    margin-top: var(--s-2);
+  }
+</style>

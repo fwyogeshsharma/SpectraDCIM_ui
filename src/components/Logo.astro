@@ -1,0 +1,28 @@
+---
+// The original SpectraDCIM logo (mark and wordmark), with its dark background removed.
+// Source artwork: assets/brand/spectradcim-logo-original.png
+// Colors: the original artwork as designed. assets/brand/recolor.py makes the gradient variant (not in use).
+import dims from '../../public/brand/_logo.json';
+interface Props {
+  /** displayed height in px */
+  size?: number;
+}
+const { size = 56 } = Astro.props;
+const width = Math.round((dims.w / dims.h) * size);
+---
+
+<a class="logo" href="/" aria-label="SpectraDCIM home">
+  <img src="/brand/spectradcim-logo.webp" width={width} height={size} alt="SpectraDCIM" title="SpectraDCIM: data center infrastructure management" decoding="async" />
+</a>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+  }
+  .logo img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+  }
+</style>

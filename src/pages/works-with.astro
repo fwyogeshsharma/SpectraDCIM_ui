@@ -1,0 +1,365 @@
+---
+import Backdrop from '../components/Backdrop.astro';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+
+const classes = [
+  { icon: 'rack', title: 'IT', items: ['Servers and their management controllers', 'Switches', 'Routers', 'Firewalls', 'Load balancers', 'Storage'] },
+  { icon: 'power', title: 'Power', items: ['Utility feed', 'Transformer', 'Switchgear', 'Transfer switch', 'Generator', 'UPS', 'Remote power panel', 'Rack PDU'] },
+  { icon: 'fan', title: 'Cooling', items: ['CRAH', 'Chiller', 'Pump', 'Cooling tower', 'Valve', 'Coolant distribution unit'] },
+  { icon: 'thermal', title: 'Sensors and fire', items: ['Temperature and humidity sensors', 'Power and energy meters', 'Fire panels, monitoring only'] },
+];
+
+const integrations = [
+  { icon: 'file', title: 'Open API', text: 'Everything the console shows can be read by your own tools, and every call is documented.' },
+  { icon: 'chart', title: 'Live feed', text: 'Live readings and alarm changes are sent to your systems as they happen.' },
+  { icon: 'layers', title: 'Metrics export', text: 'Metrics in a standard format, ready for the monitoring you already run.' },
+  { icon: 'mail', title: 'Email', text: 'Alarm notifications sent through your own mail server.' },
+  { icon: 'link', title: 'Jira / JSM', beta: true, text: 'Tickets opened from incidents, and inventory exported to Jira Assets.' },
+];
+
+const flow = [
+  { icon: 'rack', title: 'Devices', text: 'IT, power, cooling, sensors' },
+  { icon: 'search', title: 'Collectors', text: 'On each network at the site' },
+  { icon: 'chart', title: 'Secure link', text: 'Encrypted and authenticated' },
+  { icon: 'layers', title: 'Platform', text: 'Rules, correlation, history' },
+  { icon: 'cube', title: 'Console and integrations', text: 'People and other systems' },
+];
+
+const facts = [
+  { title: 'A collector per network', text: 'Production, management and plant networks each get their own collectors, so no network has to be bridged to another.' },
+  { title: 'Automatic failover', text: 'If a collector stops, another one takes over its devices without anyone stepping in.' },
+  { title: 'Nothing lost when a link drops', text: 'If the connection to the platform drops, a collector keeps reading and sends the results when it returns.' },
+  { title: 'Verified updates', text: 'Collectors update themselves, and only with releases that have been verified as genuine.' },
+  { title: 'Installs where you need it', text: 'A collector runs as a container or directly on a server or virtual machine at the site.' },
+  { title: 'Self-hosted platform', text: 'The platform runs on your own infrastructure, and your data stays there.' },
+];
+
+const today = [
+  'Encrypted, authenticated device polling',
+  'Every collector proves its identity to the platform',
+  'Verified software updates',
+  'Device credentials stored encrypted',
+  'Audit trail on alarm actions',
+  'Three roles: viewer, operator and admin',
+];
+---
+
+<Base
+  title="Supported devices and integrations, no agents"
+  description="The device classes SpectraDCIM reads, the systems it shares data with, and how collectors connect to your equipment without agents."
+>
+  <PageHero slot="hero" pill="Works with" title="Named device classes. Open integrations. No black box." center>
+    What SpectraDCIM reads, what it shares, how the pieces are deployed and how they are secured, stated plainly.
+  </PageHero>
+
+  <!-- how it connects -->
+  <section class="section">
+    <div class="wrap split">
+      <div>
+        <SectionHead pill="How it connects" title="Standard interfaces, no agents">
+          Collectors sit on your network and read each device over the interface it already exposes. IT equipment is
+          read over its management interfaces, and power and cooling plant over the building-automation interfaces
+          it already speaks. Device events are taken as they happen and confirmed by a regular reading.
+        </SectionHead>
+      </div>
+      <div class="card card--grid" data-anim="up">
+        <ul class="checks">
+          <li><span><strong>Nothing installed on the equipment.</strong> Devices are read the way their makers intended.</span></li>
+          <li><span><strong>Everything stays inside your network.</strong> The collectors and the platform run on infrastructure you control, and so does your telemetry.</span></li>
+          <li><span><strong>Fast and certain.</strong> An event raises the alarm at once, and the next polled reading confirms it.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- device classes -->
+  <section class="section pbg">
+    <Backdrop view="ups" />
+    <div class="wrap">
+      <SectionHead pill="Device classes" title="The equipment it reads" center>
+        White space and gray space in one model. Each class comes with its own readings and alarm rules.
+      </SectionHead>
+      <div class="grid grid-4">
+        {
+          classes.map((c) => (
+            <div class="card card--raised cls" data-anim="up-block">
+              <span class="tile">
+                <Icon name={c.icon} />
+              </span>
+              <h3>{c.title}</h3>
+              <ul>
+                {c.items.map((i) => <li>{i}</li>)}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- integrations -->
+  <section class="section">
+    <div class="wrap">
+      <SectionHead pill="Integrations" title="Your data is yours to use">
+        Open ways out of the platform, for scripts, dashboards and the tools your teams already work in.
+      </SectionHead>
+      <div class="grid grid-3">
+        {
+          integrations.map((n) => (
+            <div class="card card--grid" data-anim="up">
+              <span class="tile">
+                <Icon name={n.icon} />
+              </span>
+              <h3>
+                {n.title}
+                {n.beta && <span class="tag">Beta</span>}
+              </h3>
+              <p>{n.text}</p>
+            </div>
+          ))
+        }
+        <a class="card silk-card intg-cta" href="/demo" data-anim="up">
+          <h3>Need something else?</h3>
+          <p>Tell us which system you need to reach and we will show how the API covers it.</p>
+          <span class="link-arrow">
+            Request a demo
+            <span class="circle"><Icon name="arrow" size={16} /></span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- architecture -->
+  <section class="section pbg">
+    <Backdrop view="yard" />
+    <div class="wrap">
+      <SectionHead pill="Deployment" title="Where each part runs" center>
+        Collectors at each site send their readings securely to one platform that you host.
+      </SectionHead>
+
+      <div class="card card--grid arch" role="img" aria-label="Illustration of the deployment: devices are read by collectors, which send readings over a secure link to the platform, which serves the console and your other systems" data-anim="up-block">
+        <div class="arch__scope arch__scope--site"><span>Each site</span></div>
+        <div class="arch__scope arch__scope--core"><span>Self-hosted platform</span></div>
+        <ol class="arch__flow">
+          {
+            flow.map((f, k) => (
+              <li class:list={['arch__node', { 'arch__node--hi': k === 3 }]}>
+                <span class="tile">
+                  <Icon name={f.icon} />
+                </span>
+                <strong>{f.title}</strong>
+                <small>{f.text}</small>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <div class="grid grid-3 facts">
+        {
+          facts.map((f) => (
+            <div class="fact" data-anim="up">
+              <h3>{f.title}</h3>
+              <p>{f.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- security -->
+  <section class="section">
+    <div class="wrap">
+      <SectionHead pill="Security" title="How it is protected">
+        The controls in place between your devices, the collectors and the platform.
+      </SectionHead>
+      <div class="card card--raised sec" data-anim="up-block">
+        <ul class="checks">
+          {today.map((t) => <li>{t}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .checks li > span {
+    min-width: 0;
+  }
+  .split :global(.sec-head) {
+    margin-bottom: 0;
+  }
+
+  /* device classes */
+  .cls ul {
+    list-style: none;
+    margin: var(--s-4) 0 0;
+    padding: 0;
+  }
+  .cls li {
+    padding: var(--s-3) 0;
+    border-top: 1px solid var(--line);
+    color: var(--body);
+    line-height: 1.35;
+  }
+
+  /* integrations */
+  .intg-cta {
+    display: grid;
+    align-content: space-between;
+    gap: var(--s-4);
+    border-color: rgba(76, 195, 255, 0.5);
+  }
+  .intg-cta p {
+    color: var(--body);
+  }
+
+  /* architecture */
+  .arch {
+    padding: clamp(46px, 5vw, 64px) clamp(18px, 2.4vw, 34px) clamp(22px, 2.4vw, 34px);
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    column-gap: var(--s-5);
+  }
+  .arch__scope {
+    grid-row: 1;
+    position: relative;
+    border: 1px dashed rgba(76, 195, 255, 0.5);
+    border-radius: var(--r-card);
+    margin: calc(-1 * var(--s-6)) calc(-1 * var(--s-2)) calc(-1 * var(--s-2));
+    z-index: 0;
+  }
+  .arch__scope--site {
+    grid-column: 1;
+  }
+  .arch__scope--core {
+    grid-column: 2;
+  }
+  .arch__scope span {
+    position: absolute;
+    top: -11px;
+    left: 16px;
+    padding: 0 var(--s-2);
+    background: var(--ink-0);
+    font-family: var(--font-head);
+    font-size: 14px;
+    color: var(--accent-text);
+  }
+  .arch__flow {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--s-5);
+  }
+  .arch__node {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    gap: var(--s-2);
+    padding: var(--s-5) var(--s-2);
+    text-align: center;
+    border-radius: var(--r-card);
+    border: 1px solid var(--line);
+    background: var(--ink-1);
+  }
+  .arch__node--hi {
+    border-color: rgba(76, 195, 255, 0.6);
+    background: var(--ink-2);
+  }
+  .arch__node .tile {
+    margin-bottom: var(--s-2);
+  }
+  .arch__node strong {
+    font-family: var(--font-head);
+    font-weight: 500;
+    color: var(--head);
+  }
+  .arch__node small {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.35;
+  }
+  .arch__node:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 46px;
+    right: -18px;
+    width: 9px;
+    height: 9px;
+    border-top: 2px solid var(--accent-text);
+    border-right: 2px solid var(--accent-text);
+    transform: rotate(45deg);
+    z-index: 2;
+  }
+  @media (max-width: 860px) {
+    .arch {
+      grid-template-columns: 1fr;
+      padding-top: clamp(22px, 2.4vw, 34px);
+    }
+    .arch__scope {
+      display: none;
+    }
+    .arch__flow {
+      grid-template-columns: 1fr;
+      gap: var(--s-5);
+    }
+    .arch__node {
+      grid-template-columns: 54px minmax(0, 1fr);
+      justify-items: start;
+      text-align: left;
+      column-gap: var(--s-4);
+      padding: var(--s-4);
+    }
+    .arch__node .tile {
+      grid-row: 1 / span 2;
+      margin: 0;
+    }
+    .arch__node:not(:last-child)::after {
+      top: auto;
+      right: auto;
+      bottom: -18px;
+      left: 38px;
+      transform: rotate(135deg);
+    }
+  }
+
+  .facts {
+    margin-top: clamp(36px, 4vw, 56px);
+    gap: var(--s-6) var(--s-7);
+  }
+  .fact {
+    padding-top: var(--s-5);
+    border-top: 2px solid var(--accent-deep);
+  }
+  .fact h3 {
+    font-size: 19px;
+    line-height: 1.25;
+  }
+  .fact p {
+    margin-top: var(--s-2);
+  }
+
+  /* security */
+  .sec .checks {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-4) var(--s-6);
+  }
+  @media (max-width: 800px) {
+    .sec .checks {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>
