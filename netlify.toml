@@ -1,0 +1,8 @@
+# Netlify build settings. HTTPS itself is turned on in the Netlify dashboard
+# (Domain management > HTTPS: provision the certificate, then switch on "Force HTTPS").
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
