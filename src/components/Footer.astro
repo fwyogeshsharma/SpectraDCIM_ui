@@ -2,10 +2,7 @@
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
 import Backdrop from './Backdrop.astro';
-import { lastmodFor } from '../data/dates';
 const year = new Date().getFullYear();
-const modified = lastmodFor(Astro.url.pathname.replace(/\/$/, '') || '/');
-const modifiedText = new Date(modified + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 const cols = [
   {
     title: 'Platform',
@@ -70,7 +67,7 @@ const cols = [
       <a href="/partners/"><span class="ico"><Icon name="handshake" size={20} /></span>Become a partner</a>
     </div>
     <div class="ftr__legal">
-      <p>Copyright {year} SpectraDCIM. All rights reserved. Page last updated <time datetime={modified}>{modifiedText}</time>.</p>
+      <p>Copyright {year} SpectraDCIM. All rights reserved.</p>
     </div>
   </div>
 </footer>
