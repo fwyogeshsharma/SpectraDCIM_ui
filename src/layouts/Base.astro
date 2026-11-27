@@ -56,7 +56,8 @@ const jsonLd = {
       '@id': `${site}/#organization`,
       name: 'SpectraDCIM',
       url: `${site}/`,
-      logo: { '@type': 'ImageObject', url: `${site}/brand/spectradcim-logo.webp`, contentUrl: `${site}/brand/spectradcim-logo.webp`, width: 860, height: 216 },
+      logo: { '@type': 'ImageObject', url: `${site}/favicon.png`, contentUrl: `${site}/favicon.png`, width: 192, height: 192 },
+      image: `${site}/favicon.png`,
       description: 'Data center infrastructure management that watches power, cooling and IT as one.',
     },
     ...(faq.length
@@ -67,7 +68,7 @@ const jsonLd = {
           mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
         }]
       : []),
-    { '@type': 'WebSite', '@id': `${site}/#website`, url: `${site}/`, name: 'SpectraDCIM', publisher: { '@id': `${site}/#organization` } },
+    { '@type': 'WebSite', '@id': `${site}/#website`, url: `${site}/`, name: 'SpectraDCIM', alternateName: ['Spectra DCIM', 'SpectraDCIM'], publisher: { '@id': `${site}/#organization` } },
     {
       '@type': 'WebPage',
       '@id': `${canonical}#webpage`,
