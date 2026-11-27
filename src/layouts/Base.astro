@@ -3,7 +3,6 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Backdrop from '../components/Backdrop.astro';
-import { lastmodFor } from '../data/dates';
 
 interface Props {
   title: string;
@@ -40,7 +39,6 @@ const byPath: Record<string, string> = {
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const view = bg ?? byPath[path] ?? 'hall';
 // The one public address of this page: with a trailing slash, the form Netlify serves and every internal link uses.
-const modified = lastmodFor(path);
 const canonical = new URL(path === '/' ? '/' : `${path}/`, Astro.site).href;
 // The picture a link preview shows. Source: assets/share/og.html.
 const shareImage = new URL('/og.jpg', Astro.site).href;
@@ -78,7 +76,6 @@ const jsonLd = {
       isPartOf: { '@id': `${site}/#website` },
       publisher: { '@id': `${site}/#organization` },
       inLanguage: 'en',
-      dateModified: modified,
       ...(crumbs.length ? { breadcrumb: { '@id': `${canonical}#breadcrumb` } } : {}),
     },
     ...(crumbs.length
@@ -117,7 +114,6 @@ const fullTitle = title === 'Home' ? 'SpectraDCIM | DCIM Software for Power, Coo
     {!noindex && <meta property="og:url" content={canonical} />}
     {!noindex && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
     <meta property="og:type" content="website" />
-    {!noindex && <meta property="og:updated_time" content={modified} />}
     <meta property="og:site_name" content="SpectraDCIM" />
     <meta property="og:image" content={shareImage} />
     <meta property="og:image:width" content="1200" />
